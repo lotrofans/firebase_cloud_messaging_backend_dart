@@ -1,7 +1,7 @@
 name: firebase_cloud_messaging_backend
 description: Use Firebase Cloud Messaging in your dart server code
 author: lotrofans
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/lotrofans/firebase_cloud_messaging_backend_dart
 # homepage: https://www.example.com
 # author: Simon <simon@pdad.de>
