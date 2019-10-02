@@ -1,5 +1,5 @@
 name: firebase_cloud_messaging_backend
-description: Use fcm in your dart code.
+description: Use Firebase Cloud Messaging in your dart server code
 author: lotrofans
 version: 1.0.0
 homepage: https://github.com/lotrofans/firebase_cloud_messaging_backend_dart

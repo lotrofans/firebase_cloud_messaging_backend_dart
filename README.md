@@ -8,6 +8,11 @@ Not affiliated in any way with the official Firebase team or Google.
 
 ## Usage
 
+Acquire required informations for the JWTClaim:
+Firebase > Project > Settings > Copy your project-id
+then go on:
+Settings > Service Accounts > Generate new key > Copy important informations directly from the created file or load it with JWTClaim.from(jsonFile)
+
 A simple usage example:
 
 ```dart
