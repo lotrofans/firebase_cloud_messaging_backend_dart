@@ -12,10 +12,13 @@ class FirebaseCloudMessagingServer {
   ///Fill JWTClaim with informations from this file, or load it wirh JWTClaim.from();
   JWTClaim jwtClaim;
   String projectId;
+
   ///Caches authCredentials(up to 1 hour)
   bool cacheAuth;
   AccessCredentials accessCredentials;
-  FirebaseCloudMessagingServer(this.jwtClaim, this.projectId, {this.cacheAuth: true});
+
+  FirebaseCloudMessagingServer(this.jwtClaim, this.projectId,
+      {this.cacheAuth: true});
 
   Future<AccessCredentials> performAuth() async {
     var accountCredentials = ServiceAccountCredentials.fromJson({
@@ -27,7 +30,8 @@ class FirebaseCloudMessagingServer {
     });
     var scopes = ["https://www.googleapis.com/auth/firebase.messaging"];
     var client = http.Client();
-    accessCredentials = await obtainAccessCredentialsViaServiceAccount(accountCredentials, scopes, client);
+    accessCredentials = await obtainAccessCredentialsViaServiceAccount(
+        accountCredentials, scopes, client);
     client.close();
     return accessCredentials;
   }
@@ -38,24 +42,32 @@ class FirebaseCloudMessagingServer {
 
   Future<List<ServerResult>> sendMessages(List<Send> sendObjects) async {
     List<ServerResult> results = List();
-    for(Send sendObject in sendObjects){
+    for (Send sendObject in sendObjects) {
       results.add((await _send(sendObject)));
     }
     return results;
   }
 
   Future<ServerResult> _send(Send sendObject) async {
-    if(accessCredentials == null || DateTime.now().isAfter(accessCredentials.accessToken.expiry) || !cacheAuth){
+    if (accessCredentials == null ||
+        DateTime.now().isAfter(accessCredentials.accessToken.expiry) ||
+        !cacheAuth) {
       await performAuth();
     }
     var url = 'https://fcm.googleapis.com/v1/projects/$projectId/messages:send';
-    var response = await http.post(url, headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer ${accessCredentials.accessToken.data}"
-    }, body: json.encode(sendObject.toJson()));
+    var response = await http.post(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${accessCredentials.accessToken.data}"
+        },
+        body: json.encode(sendObject.toJson()));
     var successful = response.statusCode == 200;
     print("successful: $successful");
-    var serverResult = ServerResult(successful, response.statusCode, successful ? Message.fromJson(json.decode(response.body)) : Message(), response.reasonPhrase);
+    var serverResult = ServerResult(
+        successful,
+        response.statusCode,
+        successful ? Message.fromJson(json.decode(response.body)) : Message(),
+        response.reasonPhrase);
     print(serverResult);
     return serverResult;
   }
@@ -67,13 +79,11 @@ class ServerResult {
   Message messageSent;
   String errorPhrase;
 
-  ServerResult(this.successful, this.statusCode, this.messageSent,
-      this.errorPhrase);
+  ServerResult(
+      this.successful, this.statusCode, this.messageSent, this.errorPhrase);
 
   @override
   String toString() {
     return 'ServerResult{successful: $successful, statusCode: $statusCode, messageSent: $messageSent, errorPhrase: $errorPhrase}';
   }
-
-
 }

@@ -24,7 +24,9 @@ class JWTClaim {
 
   Map<String, dynamic> toJson() => _$JWTClaimToJson(this);
 
-  JWTClaim({this.client_email, this.client_id, this.private_key_id,
+  JWTClaim(
+      {this.client_email,
+      this.client_id,
+      this.private_key_id,
       this.private_key});
-
 }

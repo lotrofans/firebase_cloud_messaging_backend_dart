@@ -10,5 +10,4 @@ export 'package:firebase_cloud_messaging_backend/src/logic/Notification.dart';
 export 'package:firebase_cloud_messaging_backend/src/logic/AndroidConfig.dart';
 export 'package:firebase_cloud_messaging_backend/src/logic/AndroidNotification.dart';
 
-
 // TODO: Export any libraries intended for clients of this package.
