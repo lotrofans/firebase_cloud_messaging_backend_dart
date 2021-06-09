@@ -8,13 +8,13 @@ part of 'WebpushConfig.dart';
 
 WebpushConfig _$WebpushConfigFromJson(Map<String, dynamic> json) {
   return WebpushConfig(
-    headers: (json['headers'] as Map<String, dynamic>)?.map(
+    headers: (json['headers'] as Map<String, dynamic>?)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
-    data: (json['data'] as Map<String, dynamic>)?.map(
+    data: (json['data'] as Map<String, dynamic>?)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
-    notification: (json['notification'] as Map<String, dynamic>)?.map(
+    notification: (json['notification'] as Map<String, dynamic>?)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
   );

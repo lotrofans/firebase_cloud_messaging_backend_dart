@@ -8,9 +8,9 @@ part of 'Notification.dart';
 
 Notification _$NotificationFromJson(Map<String, dynamic> json) {
   return Notification(
-    title: json['title'] as String,
-    body: json['body'] as String,
-    image: json['image'] as String,
+    title: json['title'] as String?,
+    body: json['body'] as String?,
+    image: json['image'] as String?,
   );
 }
 

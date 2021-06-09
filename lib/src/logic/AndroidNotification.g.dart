@@ -8,38 +8,41 @@ part of 'AndroidNotification.dart';
 
 AndroidNotification _$AndroidNotificationFromJson(Map<String, dynamic> json) {
   return AndroidNotification(
-    title: json['title'] as String,
-    body: json['body'] as String,
-    icon: json['icon'] as String,
-    color: json['color'] as String,
-    sound: json['sound'] as String,
-    tag: json['tag'] as String,
-    click_action: json['click_action'] as String,
-    body_loc_key: json['body_loc_key'] as String,
-    body_loc_args:
-        (json['body_loc_args'] as List)?.map((e) => e as String)?.toList(),
-    title_loc_key: json['title_loc_key'] as String,
-    title_loc_args:
-        (json['title_loc_args'] as List)?.map((e) => e as String)?.toList(),
-    channel_id: json['channel_id'] as String,
-    ticker: json['ticker'] as String,
-    sticky: json['sticky'] as bool,
-    event_time: json['event_time'] as String,
-    local_only: json['local_only'] as bool,
+    title: json['title'] as String?,
+    body: json['body'] as String?,
+    icon: json['icon'] as String?,
+    color: json['color'] as String?,
+    sound: json['sound'] as String?,
+    tag: json['tag'] as String?,
+    click_action: json['click_action'] as String?,
+    body_loc_key: json['body_loc_key'] as String?,
+    body_loc_args: (json['body_loc_args'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
+    title_loc_key: json['title_loc_key'] as String?,
+    title_loc_args: (json['title_loc_args'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
+    channel_id: json['channel_id'] as String?,
+    ticker: json['ticker'] as String?,
+    sticky: json['sticky'] as bool?,
+    event_time: json['event_time'] as String?,
+    local_only: json['local_only'] as bool?,
     notification_priority: _$enumDecodeNullable(
         _$NotificationPriorityEnumMap, json['notification_priority']),
-    default_sound: json['default_sound'] as bool,
-    default_vibrate_timings: json['default_vibrate_timings'] as bool,
-    default_light_settings: json['default_light_settings'] as bool,
-    vibrate_timings:
-        (json['vibrate_timings'] as List)?.map((e) => e as String)?.toList(),
+    default_sound: json['default_sound'] as bool?,
+    default_vibrate_timings: json['default_vibrate_timings'] as bool?,
+    default_light_settings: json['default_light_settings'] as bool?,
+    vibrate_timings: (json['vibrate_timings'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
     visibility: _$enumDecodeNullable(_$VisibilityEnumMap, json['visibility']),
-    notification_count: json['notification_count'] as int,
+    notification_count: json['notification_count'] as int?,
     light_settings: json['light_settings'] == null
         ? null
         : LightSettings.fromJson(
             json['light_settings'] as Map<String, dynamic>),
-    image: json['image'] as String,
+    image: json['image'] as String?,
   );
 }
 
@@ -74,36 +77,41 @@ Map<String, dynamic> _$AndroidNotificationToJson(
       'image': instance.image,
     };
 
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
 }) {
   if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
 }
 
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
+K? _$enumDecodeNullable<K, V>(
+  Map<K, V> enumValues,
   dynamic source, {
-  T unknownValue,
+  K? unknownValue,
 }) {
   if (source == null) {
     return null;
   }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
 const _$NotificationPriorityEnumMap = {
@@ -127,8 +135,8 @@ LightSettings _$LightSettingsFromJson(Map<String, dynamic> json) {
     color: json['color'] == null
         ? null
         : FCMColor.fromJson(json['color'] as Map<String, dynamic>),
-    light_on_duration: json['light_on_duration'] as String,
-    light_off_duration: json['light_off_duration'] as String,
+    light_on_duration: json['light_on_duration'] as String?,
+    light_off_duration: json['light_off_duration'] as String?,
   );
 }
 
@@ -141,10 +149,10 @@ Map<String, dynamic> _$LightSettingsToJson(LightSettings instance) =>
 
 FCMColor _$FCMColorFromJson(Map<String, dynamic> json) {
   return FCMColor(
-    red: json['red'] as int,
-    green: json['green'] as int,
-    blue: json['blue'] as int,
-    alpha: json['alpha'] as int,
+    red: json['red'] as int?,
+    green: json['green'] as int?,
+    blue: json['blue'] as int?,
+    alpha: json['alpha'] as int?,
   );
 }
 

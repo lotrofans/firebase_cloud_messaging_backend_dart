@@ -8,7 +8,7 @@ part of 'Send.dart';
 
 Send _$SendFromJson(Map<String, dynamic> json) {
   return Send(
-    validate_only: json['validate_only'] as bool,
+    validate_only: json['validate_only'] as bool?,
     message: json['message'] == null
         ? null
         : Message.fromJson(json['message'] as Map<String, dynamic>),

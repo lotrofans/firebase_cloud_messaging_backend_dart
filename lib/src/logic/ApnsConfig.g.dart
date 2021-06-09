@@ -8,10 +8,10 @@ part of 'ApnsConfig.dart';
 
 ApnsConfig _$ApnsConfigFromJson(Map<String, dynamic> json) {
   return ApnsConfig(
-    headers: (json['headers'] as Map<String, dynamic>)?.map(
+    headers: (json['headers'] as Map<String, dynamic>?)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
-    payload: (json['payload'] as Map<String, dynamic>)?.map(
+    payload: (json['payload'] as Map<String, dynamic>?)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
   );

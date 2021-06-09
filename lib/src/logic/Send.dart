@@ -4,10 +4,10 @@ import 'Message.dart';
 
 part 'Send.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Send {
-  bool validate_only;
-  Message message;
+  bool? validate_only;
+  Message? message;
 
   factory Send.fromJson(Map<String, dynamic> json) => _$SendFromJson(json);
 
