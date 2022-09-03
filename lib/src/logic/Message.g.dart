@@ -8,8 +8,8 @@ part of 'Message.dart';
 
 Message _$MessageFromJson(Map<String, dynamic> json) {
   return Message(
-    name: json['name'] as String,
-    data: (json['data'] as Map<String, dynamic>)?.map(
+    name: json['name'] as String?,
+    data: (json['data'] as Map<String, dynamic>?)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
     notification: json['notification'] == null
@@ -27,9 +27,9 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     fcm_options: json['fcm_options'] == null
         ? null
         : FcmOptions.fromJson(json['fcm_options'] as Map<String, dynamic>),
-    token: json['token'] as String,
-    topic: json['topic'] as String,
-    condition: json['condition'] as String,
+    token: json['token'] as String?,
+    topic: json['topic'] as String?,
+    condition: json['condition'] as String?,
   );
 }
 

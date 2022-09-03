@@ -8,7 +8,7 @@ part of 'FcmOptions.dart';
 
 FcmOptions _$FcmOptionsFromJson(Map<String, dynamic> json) {
   return FcmOptions(
-    analytics_label: json['analytics_label'] as String,
+    analytics_label: json['analytics_label'] as String?,
   );
 }
 

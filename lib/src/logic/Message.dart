@@ -8,56 +8,45 @@ import 'WebpushConfig.dart';
 
 part 'Message.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Message {
   ///Output Only. The identifier of the message sent, in the format of projects/*/messages/{message_id}.
-  String name;
+  String? name;
 
   ///Input only. Arbitrary key/value payload. The key should not be a reserved word ("from", "message_type", or any word starting with "google" or "gcm").
   //
   //An object containing a list of "key": value pairs. Example: { "name": "wrench", "mass": "1.3kg", "count": "3" }.
-  Map<String, String> data;
+  Map<String, String>? data;
 
   ///Input only. Basic notification template to use across all platforms.
-  Notification notification;
+  Notification? notification;
 
   ///Input only. Android specific options for messages sent through FCM connection server.
-  AndroidConfig android;
-  WebpushConfig webpush;
-  ApnsConfig apns;
-  FcmOptions fcm_options;
+  AndroidConfig? android;
+  WebpushConfig? webpush;
+  ApnsConfig? apns;
+  FcmOptions? fcm_options;
 
   /// Registration token to send a message to.
   // Union field target can be only one of the following:
   ///Union field target. Required. Input only. Target to send a message to. target can be only one of token, topic or condition.
-  String token;
+  String? token;
 
   /// Topic name to send a message to, e.g. "weather". Note: "/topics/" prefix should not be provided.
   // Union field target can be only one of the following:
   ///Union field target. Required. Input only. Target to send a message to. target can be only one of token, topic or condition.
-  String topic;
+  String? topic;
 
   /// Condition to send a message to, e.g. "'foo' in topics && 'bar' in topics".
   // Union field target can be only one of the following:
   ///Union field target. Required. Input only. Target to send a message to. target can be only one of token, topic or condition.
-  String condition;
+  String? condition;
 
-  factory Message.fromJson(Map<String, dynamic> json) =>
-      _$MessageFromJson(json);
+  factory Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json);
 
   Map<String, dynamic> toJson() => _$MessageToJson(this);
 
-  Message(
-      {this.name,
-      this.data,
-      this.notification,
-      this.android,
-      this.webpush,
-      this.apns,
-      this.fcm_options,
-      this.token,
-      this.topic,
-      this.condition});
+  Message({this.name, this.data, this.notification, this.android, this.webpush, this.apns, this.fcm_options, this.token, this.topic, this.condition});
 
   @override
   String toString() {

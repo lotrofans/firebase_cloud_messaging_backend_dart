@@ -8,10 +8,10 @@ part of 'JWTClaim.dart';
 
 JWTClaim _$JWTClaimFromJson(Map<String, dynamic> json) {
   return JWTClaim(
-    client_email: json['client_email'] as String,
-    client_id: json['client_id'] as String,
-    private_key_id: json['private_key_id'] as String,
-    private_key: json['private_key'] as String,
+    client_email: json['client_email'] as String?,
+    client_id: json['client_id'] as String?,
+    private_key_id: json['private_key_id'] as String?,
+    private_key: json['private_key'] as String?,
   );
 }
 
